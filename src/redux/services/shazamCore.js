@@ -13,8 +13,9 @@ const getSpotifyToken = async () => {
       'Authorization': `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
     },
   });
-
-  return response.data.access_token;
+  const token = response.data.access_token;
+  console.log('Spotify Token:', token); // Debugging: Log the access token
+  return token;
 };
 
 export const shazamCoreApi = createApi({
@@ -29,8 +30,8 @@ export const shazamCoreApi = createApi({
   }),
   endpoints: (builder) => ({
     getTopCharts: builder.query({ query: () => 'browse/categories/toplists/playlists' }),
-    getSongsByGenre: builder.query({ query: (genreId) => `recommendations?seed_genres=${genreId}` }),
-    getSongsByCountry: builder.query({ query: (country) => `browse/categories/toplists/playlists?country=${country}` }),
+    getSongsByGenre: builder.query({ query: () => `browse/categories/dinner/playlists` }),
+    getSongsByCountry: builder.query({ query: (country) => `browse/categories/0JQ5DAqbMKFz6FAsUtgAab/playlists` }),
     getSongsBySearch: builder.query({ query: (searchTerm) => `search?q=${searchTerm}&type=track,artist` }),
     getArtistDetails: builder.query({ query: (artistId) => `artists/${artistId}` }),
     getSongDetails: builder.query({ query: (songId) => `tracks/${songId}` }),

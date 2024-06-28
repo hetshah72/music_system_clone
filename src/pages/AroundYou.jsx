@@ -24,17 +24,17 @@ const CountryTracks = () => {
   if (error && country !== '') return <Error />;
 
   // Ensure data is an array before mapping
-  const songs = Array.isArray(data) ? data : [];
+  const songs = Array.isArray(data?.playlists?.items) ? data : [];
 
   return (
     <div className="flex flex-col">
       <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">Around you <span className="font-black">{country}</span></h2>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {songs.map((song, i) => (
+        {data.playlists.items.map((playlist, i) => (
           <SongCard
-            key={song.key || i} // Use i as a fallback key if song.key is undefined
-            song={song}
+          key={playlist.id}
+          playlist={playlist}
             isPlaying={isPlaying}
             activeSong={activeSong}
             data={data}

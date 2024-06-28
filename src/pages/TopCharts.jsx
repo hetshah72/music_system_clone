@@ -12,17 +12,17 @@ const TopCharts = () => {
   if (isFetching) return <Loader title="Loading Top Charts" />;
 
   // Handling error state or unexpected data structure
-  if (error || !Array.isArray(data?.playlists)) return <Error />;
+  if (error || !Array.isArray(data?.playlists?.items)) return <Error />;
 
   return (
     <div className="flex flex-col">
       <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">Discover Top Charts</h2>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {data.playlists.map((playlist, i) => (
+        {data.playlists.items.map((playlist, i) => (
           <SongCard
-            key={playlist.key}
-            song={playlist}
+            key={playlist.id}
+            playlist={playlist}
             isPlaying={isPlaying}
             activeSong={activeSong}
             data={data}
